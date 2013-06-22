@@ -7,4 +7,6 @@ We have a working example of using python to parse the replay files - https://gi
 
 Can we integrate this into C# so that we can parse the file straight into an object that C# can consume?
 
-Early research I did showed me this wasn't possible - http://stackoverflow.com/questions/14922722/how-i-can-deserialize-python-pickles-in-c
+~~Early research I did showed me this wasn't possible - http://stackoverflow.com/questions/14922722/how-i-can-deserialize-python-pickles-in-c~~
+
+Proven wrong.
