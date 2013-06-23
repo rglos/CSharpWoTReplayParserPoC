@@ -9,6 +9,7 @@ using Microsoft.Scripting;
 using Microsoft.Scripting.Hosting;
 using Newtonsoft.Json;
 using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace CSharpWoTReplayParserPoC
 {
@@ -78,7 +79,17 @@ namespace CSharpWoTReplayParserPoC
                     byte[] data = br.ReadBytes(blocks);
                     
                     // XXX: Player data
-                    Console.WriteLine(Encoding.UTF8.GetString(data, 0, data.Length));
+                    // - get the bytes into a string
+                    var dataString = Encoding.UTF8.GetString(data, 0, data.Length);
+                    // - parse the string into a JSON object
+                    var jobject = JObject.Parse(dataString);
+                    // - TODO: Now what?  We can use the jobject to populate a Entity Framework object(s) and persist that to the database
+                    //      - so we keep seperation of concerns here... we keep the parsing seperate from the entities in case there is drift in either objects
+                    //      - i think this will work well
+                    //      - have a look at some of the more recent answers to this question - we might be able to package this nicely - http://stackoverflow.com/questions/2246694/how-to-convert-json-object-to-custom-c-sharp-object
+                    // - TODO: Test this on a partial replay - i.e. I leave the battle 1/2 through it to play another tank.  What's in the replay file?
+                    //      - with the battle results file, we get the full battle results if we view it afterwards - what about the replay?
+                    Console.WriteLine(dataString);
 
                     blocks = br.ReadInt32();
                     Console.WriteLine("[+] Frags chunk length {0}", blocks);
