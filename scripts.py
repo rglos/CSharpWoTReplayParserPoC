@@ -22,7 +22,7 @@ def decode_details(data):
     binlen = len(data) // 22
     for x in range(0, binlen):
         offset = 4*binlen + x*18
-        vehic = struct.unpack('i', data[x*4:x*4+4].encode('raw_unicode_escape'))[0]
+        vehic = struct.unpack('i', data[x*4:x*4+4])[0]
         detail_values = struct.unpack('hhhhhhhhh', data[offset:offset + 18])
         details[vehic] = dict(zip(detail, detail_values))
     return details
